@@ -2,7 +2,6 @@ package com.mnleano.timetrackerchallenge
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: InputsAdapter
     private val dateTimes: ArrayList<DateTime> = arrayListOf()
 
@@ -27,9 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar.toolbar)
 
         adapter = InputsAdapter(dateTimes)
@@ -98,18 +95,21 @@ class MainActivity : AppCompatActivity() {
         dateTimes.add(DateTime(startDate, endDate))
         adapter.notifyDataSetChanged()
 
+        binding.btnGenerate.isEnabled = true
+        binding.btnClear.isEnabled = true
+
     }
 
     fun onClearClick(v: View) {
         dateTimes.clear()
         adapter.notifyDataSetChanged()
+
+        binding.btnGenerate.isEnabled = false
+        binding.btnClear.isEnabled = false
+
     }
 
     fun onGenerateClick(v: View) {
-        if (dateTimes.size > 0) {
-            val intent = Intent(this, OutputActivity::class.java)
-            intent.putExtra(OutputActivity.KEY_DATE_TIME, dateTimes)
-            startActivity(intent)
-        }
+        startActivity(OutputActivity.makeIntent(this, dateTimes))
     }
 }
