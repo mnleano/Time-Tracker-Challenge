@@ -1,4 +1,4 @@
-package com.mnleano.timetrackerchallange
+package com.mnleano.timetrackerchallenge
 
 import org.junit.Test
 

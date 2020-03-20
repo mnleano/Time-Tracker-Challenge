@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.mnleano.timetrackerchallange"
+        applicationId "com.mnleano.timetrackerchallenge"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -20,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled true
     }
 }
 
