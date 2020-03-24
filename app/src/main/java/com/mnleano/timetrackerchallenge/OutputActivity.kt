@@ -27,7 +27,6 @@ class OutputActivity : AppCompatActivity() {
             }
         }
 
-
         for(date in dates){
             Timber.d("initData: Unique date: ${date.startDate}")
         }
